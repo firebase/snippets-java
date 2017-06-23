@@ -13,7 +13,8 @@ import java.io.IOException;
 
 public class Main {
 
-    public void getServiceAccountAccessToken() throws FileNotFoundException, IOException{
+    public void getServiceAccountAccessToken() throws FileNotFoundException, IOException {
+        // https://firebase.google.com/docs/reference/dynamic-links/analytics#api_authorization
         // [START get_service_account_tokens]
         FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
         FirebaseCredential credential = FirebaseCredentials.fromCertificate(serviceAccount);
@@ -26,7 +27,7 @@ public class Main {
                             long expirationTime = task.getResult().getExpiryTime();
                             // Attach accessToken to HTTPS request in the
                             //   "Authorization: Bearer" header
-                            // After expirationTime. you must generate a new access
+                            // After expirationTime, you must generate a new access
                             //   token
                         } else {
                             // Error
