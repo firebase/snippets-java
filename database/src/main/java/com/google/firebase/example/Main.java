@@ -17,13 +17,9 @@
 package com.google.firebase.example;
 
 import com.google.firebase.database.*;
-import com.google.firebase.internal.NonNull;
-import com.google.firebase.tasks.OnCompleteListener;
-import com.google.firebase.tasks.Task;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
@@ -94,45 +90,45 @@ public class Main {
         // [START set_user_data_all]
         DatabaseReference usersRef = ref.child("users");
 
-        Map<String, User> users = new HashMap<String, User>();
+        Map<String, User> users = new HashMap<>();
         users.put("alanisawesome", new User("June 23, 1912", "Alan Turing"));
         users.put("gracehop", new User("December 9, 1906", "Grace Hopper"));
 
-        usersRef.setValue(users);
+        usersRef.setValueAsync(users);
         // [END set_user_data_all]
 
         // [START set_user_data_child]
-        usersRef.child("alanisawesome").setValue(new User("June 23, 1912", "Alan Turing"));
-        usersRef.child("gracehop").setValue(new User("December 9, 1906", "Grace Hopper"));
+        usersRef.child("alanisawesome").setValueAsync(new User("June 23, 1912", "Alan Turing"));
+        usersRef.child("gracehop").setValueAsync(new User("December 9, 1906", "Grace Hopper"));
         // [END set_user_data_child]
 
         // [START single_user_update_children]
         DatabaseReference hopperRef = usersRef.child("gracehop");
-        Map<String, Object> hopperUpdates = new HashMap<String, Object>();
+        Map<String, Object> hopperUpdates = new HashMap<>();
         hopperUpdates.put("nickname", "Amazing Grace");
 
-        hopperRef.updateChildren(hopperUpdates);
+        hopperRef.updateChildrenAsync(hopperUpdates);
         // [END single_user_update_children]
 
         // [START multi_user_update_children]
-        Map<String, Object> userUpdates = new HashMap<String, Object>();
+        Map<String, Object> userUpdates = new HashMap<>();
         userUpdates.put("alanisawesome/nickname", "Alan The Machine");
         userUpdates.put("gracehop/nickname", "Amazing Grace");
 
-        usersRef.updateChildren(userUpdates);
+        usersRef.updateChildrenAsync(userUpdates);
         // [END multi_user_update_children]
 
         // [START multi_user_object_updates]
-        Map<String, Object> userNicknameUpdates = new HashMap<String, Object>();
+        Map<String, Object> userNicknameUpdates = new HashMap<>();
         userNicknameUpdates.put("alanisawesome", new User(null, null, "Alan The Machine"));
         userNicknameUpdates.put("gracehop", new User(null, null, "Amazing Grace"));
 
-        usersRef.updateChildren(userNicknameUpdates);
+        usersRef.updateChildrenAsync(userNicknameUpdates);
         // [END multi_user_object_updates]
 
         // [START adding_completion_callback]
         DatabaseReference dataRef = ref.child("data");
-        dataRef.setValue("I'm writing data", new DatabaseReference.CompletionListener() {
+        dataRef.setValueAsync("I'm writing data", new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) {
@@ -149,10 +145,10 @@ public class Main {
         DatabaseReference postsRef = ref.child("posts");
 
         DatabaseReference newPostRef = postsRef.push();
-        newPostRef.setValue(new Post("gracehop", "Announcing COBOL, a New Programming Language"));
+        newPostRef.setValueAsync(new Post("gracehop", "Announcing COBOL, a New Programming Language"));
 
         // We can also chain the two calls together
-        postsRef.push().setValue(new Post("alanisawesome", "The Turing Machine"));
+        postsRef.push().setValueAsync(new Post("alanisawesome", "The Turing Machine"));
         // [END push_posts]
 
         // [START getting_post_id]
