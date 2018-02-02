@@ -16,9 +16,16 @@
 
 package com.google.firebase.example;
 
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidNotification;
+import com.google.firebase.messaging.ApnsConfig;
+import com.google.firebase.messaging.Aps;
+import com.google.firebase.messaging.ApsAlert;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.WebpushConfig;
+import com.google.firebase.messaging.WebpushNotification;
 
 public class FirebaseMessagingSnippets {
 
@@ -84,6 +91,59 @@ public class FirebaseMessagingSnippets {
     // Response is a message ID string.
     System.out.println("Successfully sent message: " + response);
     // [END send_to_condition]
+  }
+
+  public Message androidMessage() {
+    // [START android_message]
+    Message message = Message.builder()
+        .setAndroidConfig(AndroidConfig.builder()
+            .setTtl(3600 * 1000) // 1 hour in milliseconds
+            .setPriority(AndroidConfig.Priority.NORMAL)
+            .setNotification(AndroidNotification.builder()
+                .setTitle("$GOOG up 1.43% on the day")
+                .setBody("$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.")
+                .setIcon("stock_ticker_update")
+                .setColor("#f45342")
+                .build())
+            .build())
+        .setTopic("industry-tech")
+        .build();
+    // [END android_message]
+    return message;
+  }
+
+  public Message apnsMessage() {
+    // [START apns_message]
+    Message message = Message.builder()
+        .setApnsConfig(ApnsConfig.builder()
+            .putHeader("apns-priority", "10")
+            .setAps(Aps.builder()
+                .setAlert(ApsAlert.builder()
+                    .setTitle("$GOOG up 1.43% on the day")
+                    .setBody("$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.")
+                    .build())
+                .setBadge(42)
+                .build())
+            .build())
+        .setTopic("industry-tech")
+        .build();
+    // [END apns_message]
+    return message;
+  }
+
+  public Message webpushMessage() {
+    // [START webpush_message]
+    Message message = Message.builder()
+        .setWebpushConfig(WebpushConfig.builder()
+            .setNotification(new WebpushNotification(
+                "$GOOG up 1.43% on the day",
+                "$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.",
+                "https://my-server/icon.png"))
+            .build())
+        .setTopic("industry-tech")
+        .build();
+    // [END webpush_message]
+    return message;
   }
 
 }
