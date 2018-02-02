@@ -24,8 +24,11 @@ import com.google.firebase.messaging.ApsAlert;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.TopicManagementResponse;
 import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
+import java.util.Arrays;
+import java.util.List;
 
 public class FirebaseMessagingSnippets {
 
@@ -146,4 +149,43 @@ public class FirebaseMessagingSnippets {
     return message;
   }
 
+  public void subscribeToTopic() throws Exception {
+    String topic = "highScores";
+    // [START subscribe]
+    // These registration tokens come from the client FCM SDKs.
+    List<String> registrationTokens = Arrays.asList(
+        "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+        // ...
+        "ecupwIfBy1w:APA91bFtuMY7MktgxA3Au_Qx7cKqnf..."
+    );
+
+    // Subscribe the devices corresponding to the registration tokens to the
+    // topic.
+    TopicManagementResponse response = FirebaseMessaging.getInstance().subscribeToTopicAsync(
+        registrationTokens, topic).get();
+    // See the TopicManagementResponse reference documentation
+    // for the contents of response.
+    System.out.println(response.getSuccessCount() + " tokens were subscribed successfully");
+    // [END subscribe]
+  }
+
+  public void unsubscribeFromTopic() throws Exception {
+    String topic = "highScores";
+    // [START unsubscribe]
+    // These registration tokens come from the client FCM SDKs.
+    List<String> registrationTokens = Arrays.asList(
+        "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+        // ...
+        "ecupwIfBy1w:APA91bFtuMY7MktgxA3Au_Qx7cKqnf..."
+    );
+
+    // Unsubscribe the devices corresponding to the registration tokens from
+    // the topic.
+    TopicManagementResponse response = FirebaseMessaging.getInstance().unsubscribeFromTopicAsync(
+        registrationTokens, topic).get();
+    // See the TopicManagementResponse reference documentation
+    // for the contents of response.
+    System.out.println(response.getSuccessCount() + " tokens were unsubscribed successfully");
+    // [END unsubscribe]
+  }
 }
