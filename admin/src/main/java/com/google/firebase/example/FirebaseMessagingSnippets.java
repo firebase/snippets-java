@@ -96,6 +96,22 @@ public class FirebaseMessagingSnippets {
     // [END send_to_condition]
   }
 
+  public void sendDryRun() throws Exception {
+    Message message = Message.builder()
+        .putData("score", "850")
+        .putData("time", "2:45")
+        .setToken("token")
+        .build();
+
+    // [START send_dry_run]
+    // Send a message in the dry run mode.
+    boolean dryRun = true;
+    String response = FirebaseMessaging.getInstance().sendAsync(message, dryRun).get();
+    // Response is a message ID string.
+    System.out.println("Dry run successful: " + response);
+    // [END send_dry_run]
+  }
+
   public Message androidMessage() {
     // [START android_message]
     Message message = Message.builder()
