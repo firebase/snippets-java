@@ -165,6 +165,30 @@ public class FirebaseMessagingSnippets {
     return message;
   }
 
+  public Message allPlatformsMessage() {
+    // [START multi_platforms_message]
+    Message message = Message.builder()
+        .setNotification(new Notification(
+            "$GOOG up 1.43% on the day",
+            "$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day."))
+        .setAndroidConfig(AndroidConfig.builder()
+            .setTtl(3600 * 1000)
+            .setNotification(AndroidNotification.builder()
+                .setIcon("stock_ticker_update")
+                .setColor("#f45342")
+                .build())
+            .build())
+        .setApnsConfig(ApnsConfig.builder()
+            .setAps(Aps.builder()
+                .setBadge(42)
+                .build())
+            .build())
+        .setTopic("industry-tech")
+        .build();
+    // [END multi_platforms_message]
+    return message;
+  }
+
   public void subscribeToTopic() throws Exception {
     String topic = "highScores";
     // [START subscribe]
