@@ -35,10 +35,9 @@ public class FirebaseMessagingSnippets {
   public void sendToToken() throws Exception {
     // [START send_to_token]
     // This registration token comes from the client FCM SDKs.
-    String registrationToken = "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...";
+    String registrationToken = "YOUR_REGISTRATION_TOKEN";
 
-    // See the "Defining the message" section below for details
-    // on how to define a message payload.
+    // See documentation on defining a message payload.
     Message message = Message.builder()
         .putData("score", "850")
         .putData("time", "2:45")
@@ -58,8 +57,7 @@ public class FirebaseMessagingSnippets {
     // The topic name can be optionally prefixed with "/topics/".
     String topic = "highScores";
 
-    // See the "Defining the message" section below for details
-    // on how to define a message payload.
+    // See documentation on defining a message payload.
     Message message = Message.builder()
         .putData("score", "850")
         .putData("time", "2:45")
@@ -79,8 +77,7 @@ public class FirebaseMessagingSnippets {
     // to either the Google stock or the tech industry topics.
     String condition = "'stock-GOOG' in topics || 'industry-tech' in topics";
 
-    // See the "Defining the message" section below for details
-    // on how to define a message payload.
+    // See documentation on defining a message payload.
     Message message = Message.builder()
         .setNotification(new Notification(
             "$GOOG up 1.43% on the day",
@@ -194,9 +191,9 @@ public class FirebaseMessagingSnippets {
     // [START subscribe]
     // These registration tokens come from the client FCM SDKs.
     List<String> registrationTokens = Arrays.asList(
-        "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+        "YOUR_REGISTRATION_TOKEN_1",
         // ...
-        "ecupwIfBy1w:APA91bFtuMY7MktgxA3Au_Qx7cKqnf..."
+        "YOUR_REGISTRATION_TOKEN_n"
     );
 
     // Subscribe the devices corresponding to the registration tokens to the
@@ -214,9 +211,9 @@ public class FirebaseMessagingSnippets {
     // [START unsubscribe]
     // These registration tokens come from the client FCM SDKs.
     List<String> registrationTokens = Arrays.asList(
-        "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+        "YOUR_REGISTRATION_TOKEN_1",
         // ...
-        "ecupwIfBy1w:APA91bFtuMY7MktgxA3Au_Qx7cKqnf..."
+        "YOUR_REGISTRATION_TOKEN_n"
     );
 
     // Unsubscribe the devices corresponding to the registration tokens from
