@@ -27,7 +27,7 @@ public class FirebaseAuthSnippets {
   public void getUserByFederatedId() throws Exception {
     // [START get_user_by_federated_id]
     UserRecord user = FirebaseAuth.getInstance().getUserByFederatedIdAsync("google.com", "google_uid1234").get();
-    System.out.println("Successfully fetched user data: " + user);
+    System.out.println("Successfully fetched user data: " + user.getUid());
     // [END get_user_by_federated_id]
   }
 
@@ -43,7 +43,7 @@ public class FirebaseAuthSnippets {
                   .build());
 
     UserRecord user = FirebaseAuth.getInstance().updateUserAsync(update).get();
-    System.out.println("Successfully updated data: " + user);
+    System.out.println("Successfully updated data: " + user.getUid());
     // [END update_user_link_federated]
   }
 
@@ -58,7 +58,7 @@ public class FirebaseAuthSnippets {
         .setDeleteProviders(providers);
 
     UserRecord user = FirebaseAuth.getInstance().updateUserAsync(update).get();
-    System.out.println("Successfully updated data: " + user);
+    System.out.println("Successfully updated data: " + user.getUid());
     // [END update_user_unlink_federated]
   }
 }
