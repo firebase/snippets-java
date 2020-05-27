@@ -18,19 +18,14 @@ package com.google.firebase.example;
 import com.google.firebase.auth.DeleteUsersResult;
 import com.google.firebase.auth.EmailIdentifier;
 import com.google.firebase.auth.ErrorInfo;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GetUsersResult;
 import com.google.firebase.auth.PhoneIdentifier;
 import com.google.firebase.auth.ProviderIdentifier;
 import com.google.firebase.auth.UidIdentifier;
 import com.google.firebase.auth.UserIdentifier;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserProvider;
 import com.google.firebase.auth.UserRecord;
-import java.util.Set;
+import java.util.Arrays;
 
 public class FirebaseAuthSnippets {
 
@@ -66,9 +61,4 @@ public class FirebaseAuthSnippets {
     }
     // [END bulk_delete_users]
   }
-
-
-
-
-
 }
