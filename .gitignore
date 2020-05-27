@@ -8,3 +8,7 @@ build/
 *.ear
 *.aar
 *.iml
+
+.project
+.classpath
+.settings
