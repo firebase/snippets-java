@@ -39,7 +39,7 @@ public class FirebaseAuthSnippets {
 
     System.out.println("Successfully fetched user data:");
     for (UserRecord user : result.getUsers()) {
-      System.out.println(user);
+      System.out.println(user.getUid());
     }
 
     System.out.println("Unable to find users corresponding to these identifiers:");
@@ -57,7 +57,7 @@ public class FirebaseAuthSnippets {
     System.out.println("Successfully deleted " + result.getSuccessCount() + " users");
     System.out.println("Failed to delete " + result.getFailureCount() + " users");
     for (ErrorInfo error : result.getErrors()) {
-      System.out.println(error);
+      System.out.println("error #" + error.getIndex() + ", reason: " + error.getReason());
     }
     // [END bulk_delete_users]
   }
