@@ -79,9 +79,10 @@ public class FirebaseMessagingSnippets {
 
     // See documentation on defining a message payload.
     Message message = Message.builder()
-        .setNotification(new Notification(
-            "$GOOG up 1.43% on the day",
-            "$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day."))
+        .setNotification(Notification.builder()
+                .setTitle("$GOOG up 1.43% on the day")
+                .setBody("$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.")
+                .build())
         .setCondition(condition)
         .build();
 
@@ -165,9 +166,10 @@ public class FirebaseMessagingSnippets {
   public Message allPlatformsMessage() {
     // [START multi_platforms_message]
     Message message = Message.builder()
-        .setNotification(new Notification(
-            "$GOOG up 1.43% on the day",
-            "$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day."))
+        .setNotification(Notification.builder()
+                .setTitle("$GOOG up 1.43% on the day")
+                .setTitle("$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.")
+                .build())
         .setAndroidConfig(AndroidConfig.builder()
             .setTtl(3600 * 1000)
             .setNotification(AndroidNotification.builder()
