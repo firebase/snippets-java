@@ -15,5 +15,5 @@ repositories {
 
 dependencies {
     // Firebase Admin Java SDK
-    compile 'com.google.firebase:firebase-admin:6.13.0'
+    compile 'com.google.firebase:firebase-admin:7.1.0'
 }
