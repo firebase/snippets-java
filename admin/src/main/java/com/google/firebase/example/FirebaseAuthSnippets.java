@@ -15,17 +15,16 @@
  */
 package com.google.firebase.example;
 
-import com.google.firebase.auth.DeleteUsersResult;
-import com.google.firebase.auth.EmailIdentifier;
-import com.google.firebase.auth.ErrorInfo;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GetUsersResult;
-import com.google.firebase.auth.PhoneIdentifier;
-import com.google.firebase.auth.ProviderIdentifier;
-import com.google.firebase.auth.UidIdentifier;
-import com.google.firebase.auth.UserIdentifier;
-import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.*;
+import com.google.firebase.auth.UserRecord.CreateRequest;
+import com.google.firebase.auth.UserRecord.UpdateRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class FirebaseAuthSnippets {
 
@@ -89,7 +88,7 @@ public class FirebaseAuthSnippets {
 
   public static void createUser() throws InterruptedException, ExecutionException {
     // [START create_user]
-    CreateRequest request = new CreateRequest()
+    UserRecord.CreateRequest request = new UserRecord.CreateRequest()
         .setEmail("user@example.com")
         .setEmailVerified(false)
         .setPassword("secretPassword")
