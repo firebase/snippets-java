@@ -22,22 +22,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Main {
-
-    public void getServiceAccountAccessToken() throws IOException {
-        // https://firebase.google.com/docs/reference/dynamic-links/analytics#api_authorization
-        // [START get_service_account_tokens]
-        FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        credentials.refresh();
-        String accessToken = credentials.getAccessToken().getTokenValue();
-        long expirationTime = credentials.getAccessToken().getExpirationTime().getTime();
-        // Attach accessToken to HTTPS request in the
-        //   "Authorization: Bearer" header
-        // After expirationTime, you must generate a new access
-        //   token
-        // [END get_service_account_tokens]
-    }
-
     public static void main(String[] args) {
         // write your code here
     }
