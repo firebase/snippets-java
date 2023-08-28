@@ -15,12 +15,15 @@
  */
 package com.google.firebase.example;
 
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.auth.*;
 import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -282,6 +285,21 @@ public class FirebaseAuthSnippets {
     userData.put("revokeTime", revocationSecond);
     ref.setValueAsync(userData).get();
     // [END save_revocation_in_db]
-    
+  }
+
+  public static String getServiceAccountAccessToken() throws IOException {
+    // https://firebase.google.com/docs/reference/dynamic-links/analytics#api_authorization
+    // [START get_service_account_tokens]
+    FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
+    GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+    credentials.refresh();
+    String accessToken = credentials.getAccessToken().getTokenValue();
+    // [START_EXCLUDE]
+    long expirationTime = credentials.getAccessToken().getExpirationTime().getTime();
+    // Attach accessToken to HTTPS request in the "Authorization: Bearer" header
+    // After expirationTime, you must generate a new access token
+    // [END_EXCLUDE]
+    return accessToken;
+    // [END get_service_account_tokens]
   }
 }

@@ -27,10 +27,20 @@ import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.TopicManagementResponse;
 import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.google.firebase.example.FirebaseAuthSnippets.getServiceAccountAccessToken;
+
 public class FirebaseMessagingSnippets {
+
+  private static final String PROJECT_ID = "<YOUR-PROJECT-ID>";
+  private static final String BASE_URL = "https://fcm.googleapis.com";
+  private static final String FCM_SEND_ENDPOINT = "/v1/projects/" + PROJECT_ID + "/messages:send";
 
   public void sendToToken() throws Exception {
     // [START send_to_token]
@@ -226,5 +236,15 @@ public class FirebaseMessagingSnippets {
     // for the contents of response.
     System.out.println(response.getSuccessCount() + " tokens were unsubscribed successfully");
     // [END unsubscribe]
+  }
+
+  private static HttpURLConnection getConnection() throws IOException {
+    // [START use_access_token]
+    URL url = new URL(BASE_URL + FCM_SEND_ENDPOINT);
+    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+    httpURLConnection.setRequestProperty("Authorization", "Bearer " + getServiceAccountAccessToken());
+    httpURLConnection.setRequestProperty("Content-Type", "application/json; UTF-8");
+    return httpURLConnection;
+    // [END use_access_token]
   }
 }
