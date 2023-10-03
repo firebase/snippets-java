@@ -167,6 +167,23 @@ public class FirebaseRemoteConfigSnippets {
     // [END rollback_rc_template]
   }
 
+  /**
+   * Retrieve a valid access token that can be use to authorize requests to the Remote Config REST
+   * API.
+   *
+   * @return Access token.
+   * @throws IOException
+   */
+  // [START retrieve_access_token]
+  public static String getAccessToken() throws IOException {
+    GoogleCredentials googleCredentials = GoogleCredentials
+            .fromStream(new FileInputStream("service-account.json"))
+            .createScoped(Arrays.asList(SCOPES));
+    googleCredentials.refreshAccessToken();
+    return googleCredentials.getAccessToken().getTokenValue();
+  }
+  // [END retrieve_access_token]
+
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     System.out.println("Hello, FirebaseRemoteConfigSnippets!");
 
@@ -185,23 +202,6 @@ public class FirebaseRemoteConfigSnippets {
 
       System.exit(1);
     }
-
-    /**
-     * Retrieve a valid access token that can be use to authorize requests to the Remote Config REST
-     * API.
-     *
-     * @return Access token.
-     * @throws IOException
-     */
-    // [START retrieve_access_token]
-    private static String getAccessToken() throws IOException {
-      GoogleCredentials googleCredentials = GoogleCredentials
-              .fromStream(new FileInputStream("service-account.json"))
-              .createScoped(Arrays.asList(SCOPES));
-      googleCredentials.refreshAccessToken();
-      return googleCredentials.getAccessToken().getTokenValue();
-    }
-    // [END retrieve_access_token]
 
     // Smoke test
     Template template = getRemoteConfig();
