@@ -41,6 +41,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class FirebaseRemoteConfigSnippets {
 
+  private final static String PROJECT_ID = "PROJECT_ID";
+  private final static String BASE_URL = "https://firebaseremoteconfig.googleapis.com";
+  private final static String REMOTE_CONFIG_ENDPOINT = "/v1/projects/" + PROJECT_ID + "/remoteConfig";
+  private final static String[] SCOPES = { "https://www.googleapis.com/auth/firebase.remoteconfig" };
+
   //Get the current Remote Config Template
   public static Template getRemoteConfig() throws ExecutionException, InterruptedException {
     // [START get_rc_template]
@@ -188,4 +193,21 @@ public class FirebaseRemoteConfigSnippets {
     rollbackToVersion(6);
     System.out.println("Done!");
   }
+
+  /**
+   * Retrieve a valid access token that can be use to authorize requests to the Remote Config REST
+   * API.
+   *
+   * @return Access token.
+   * @throws IOException
+   */
+  // [START retrieve_access_token]
+  private static String getAccessToken() throws IOException {
+    GoogleCredentials googleCredentials = GoogleCredentials
+            .fromStream(new FileInputStream("service-account.json"))
+            .createScoped(Arrays.asList(SCOPES));
+    googleCredentials.refreshAccessToken();
+    return googleCredentials.getAccessToken().getTokenValue();
+  }
+  // [END retrieve_access_token]
 }
