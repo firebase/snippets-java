@@ -168,7 +168,7 @@ public class FirebaseRemoteConfigSnippets {
   }
 
   /**
-   * Retrieve a valid access token that can be use to authorize requests to the Remote Config REST
+   * Retrieve a valid access token that can be used to authorize requests to the Remote Config REST
    * API.
    *
    * @return Access token.
