@@ -29,6 +29,11 @@ import com.google.firebase.remoteconfig.TagColor;
 import com.google.firebase.remoteconfig.Template;
 import com.google.firebase.remoteconfig.Version;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -40,6 +45,11 @@ import java.util.concurrent.ExecutionException;
  * https://firebase.google.com/docs/remote-config/automate-rc
  */
 public class FirebaseRemoteConfigSnippets {
+
+  private final static String PROJECT_ID = "PROJECT_ID";
+  private final static String BASE_URL = "https://firebaseremoteconfig.googleapis.com";
+  private final static String REMOTE_CONFIG_ENDPOINT = "/v1/projects/" + PROJECT_ID + "/remoteConfig";
+  private final static String[] SCOPES = { "https://www.googleapis.com/auth/firebase.remoteconfig" };
 
   //Get the current Remote Config Template
   public static Template getRemoteConfig() throws ExecutionException, InterruptedException {
@@ -157,6 +167,23 @@ public class FirebaseRemoteConfigSnippets {
     // [END rollback_rc_template]
   }
 
+  /**
+   * Retrieve a valid access token that can be used to authorize requests to the Remote Config REST
+   * API.
+   *
+   * @return Access token.
+   * @throws IOException
+   */
+  // [START retrieve_access_token]
+  public static String getAccessToken() throws IOException {
+    GoogleCredentials googleCredentials = GoogleCredentials
+            .fromStream(new FileInputStream("service-account.json"))
+            .createScoped(Arrays.asList(SCOPES));
+    googleCredentials.refreshAccessToken();
+    return googleCredentials.getAccessToken().getTokenValue();
+  }
+  // [END retrieve_access_token]
+
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     System.out.println("Hello, FirebaseRemoteConfigSnippets!");
 
@@ -188,4 +215,5 @@ public class FirebaseRemoteConfigSnippets {
     rollbackToVersion(6);
     System.out.println("Done!");
   }
+
 }
