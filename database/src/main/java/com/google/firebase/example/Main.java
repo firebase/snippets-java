@@ -479,7 +479,7 @@ public class Main {
         // [END limit_to_last]
 
         // [START limit_to_first]
-        dinosaursRef.orderByChild("weight").limitToFirst(2).addChildEventListener(new ChildEventListener() {
+        dinosaursRef.orderByChild("height").limitToFirst(2).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 System.out.println(dataSnapshot.getKey());
