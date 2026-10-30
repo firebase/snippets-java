@@ -1,12 +1,19 @@
-group 'com.google.firebase.example'
-version '1.0'
+plugins {
+    id 'java'
+    id 'application'
+}
 
-apply plugin: 'java'
-apply plugin: 'application'
+group = 'com.google.firebase.example'
+version = '1.0'
 
-mainClassName = 'com.google.firebase.example.Main'
+application {
+    mainClass = 'com.google.firebase.example.Main'
+}
 
-sourceCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
@@ -15,5 +22,5 @@ repositories {
 
 dependencies {
     // Firebase Admin Java SDK
-    compile 'com.google.firebase:firebase-admin:6.12.2'
+    implementation 'com.google.firebase:firebase-admin:9.11.0'
 }
