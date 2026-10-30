@@ -15,26 +15,27 @@
  */
 package com.google.firebase.example;
 
-import static com.google.cloud.firestore.Firestore;
-import static com.google.cloud.firestore.Query;
-import static com.google.cloud.firestore.AggregateQuerySnapshot;
-import static com.google.cloud.firestore.AggregateField.count;
+import com.google.cloud.firestore.AggregateField;
+import com.google.cloud.firestore.AggregateQuerySnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.Query;
+import java.util.concurrent.ExecutionException;
 
 public class FirebaseFirestoreSnippets {
 
-    public static void countAggregateCollection(Firestore db) {
+    public static void countAggregateCollection(Firestore db) throws ExecutionException, InterruptedException {
         // [START count_aggregate_collection]
         Query query = db.collection("cities");
         AggregateQuerySnapshot snapshot = query.count().get().get();
-        System.out.println("Count: " + snapshot.get(AggregateField.count());
+        System.out.println("Count: " + snapshot.get(AggregateField.count()));
         // [END count_aggregate_collection]
     }
 
-    public static void countAggregateQuery(Firestore db) {
+    public static void countAggregateQuery(Firestore db) throws ExecutionException, InterruptedException {
         // [START count_aggregate_query]
         Query query = db.collection("cities").whereEqualTo("state", "CA");
         AggregateQuerySnapshot snapshot = query.count().get().get();
-        System.out.println("Count: " + snapshot.get(AggregateField.count());
+        System.out.println("Count: " + snapshot.get(AggregateField.count()));
         // [END count_aggregate_query]
     }
 
