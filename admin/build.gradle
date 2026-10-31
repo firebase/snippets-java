@@ -23,4 +23,5 @@ repositories {
 dependencies {
     // Firebase Admin Java SDK
     implementation 'com.google.firebase:firebase-admin:9.11.0'
+    implementation 'com.google.cloud:google-cloud-firestore:3.50.0'
 }
